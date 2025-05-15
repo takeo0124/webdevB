@@ -55,9 +55,11 @@
     </ul>
     </p>
 
-    <?php for ($i = 1; $i <= 5; $i++) { ?>
-        <li>{$i}</li>
-    <?php } ?>
+    <ul>
+        <?php for ($i = 1; $i <= 5; $i++): ?>
+            <li><?php echo $i ?></li>
+        <?php endfor; ?>
+    </ul>
 
     <p>④以下のfor文を代替構文に書き換えてください。</p>
     <?php
@@ -65,6 +67,11 @@
         echo "<p>番号: $i</p>";
     }
     ?>
+
+    <?php for ($i = 1; $i <= 3; $i++): ?>
+        <p>番号: <?php echo $i ?></p>
+    <?php endfor; ?>
+
     <p>⑤HTMLの中で、foreachを使ってliリストを作る処理を代替構文で書いてください。<br>
         例：
     <ul>
@@ -75,13 +82,28 @@
         <li>5</li>
     </ul>
     </p>
+
+    <ul>
+        <?php
+        $numbers = [1, 2, 3, 4, 5];
+        foreach ($numbers as $hoge) {
+            echo "<li>{$hoge}</li>";
+        } ?>
+    </ul>
+
     <p>⑥以下のコードを代替構文に書き換えてください。</p>
+
     <?php
     $users = ['太郎', '花子', '次郎'];
     foreach ($users as $user) {
         echo "<p>{$user}さん、ようこそ！</p>";
     }
     ?>
+
+    <?php $users = ['太郎', '花子', '次郎'];
+    foreach ($users as $user): ?>
+        <p><?php echo $user; ?>さん、ようこそ！</p>
+    <?php endforeach; ?>
 </body>
 
 </html>
