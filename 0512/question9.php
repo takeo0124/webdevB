@@ -23,7 +23,7 @@ sum(10);
 
 function hello($name)
 {
-    echo 'こんにちは、' . $name . 'さん';
+    echo 'こんにちは、' . $name . 'さん'; #'こんにちは、{$name}さん'
 }
 hello('Taro');
 
@@ -49,17 +49,50 @@ even(4);
 
 // 問題6：3つの引数を受け取り、最大値を返す関数を作成し、3, 9, 7 を渡して実行してください。
 // 期待される出力：9
-
+function maximumValue($num1, $num2, $num3)
+{
+    echo max($num1, $num2, $num3);
+}
+maximumValue(3, 9, 7);
 
 
 // 問題7：配列を引数として受け取り、すべての要素の合計を返す関数を定義してください。
 // 期待される出力：10
+$num = array(1, 2, 3, 4);
+function tas($array)
+{
+    $num = 0;
+    foreach ($array as $hoge) {
+        $num = $num + $hoge;
+    }
+    echo $num;
+}
+tas($num);
 
 // 問題8：文字列を大文字に変換して返す関数を定義し、「php」を渡してください。
 // 期待される出力：PHP
+function uppercase($str)
+{
+    echo strtoupper($str);
+}
+uppercase("php");
 
 // 問題9：数字を受け取り、偶数なら「Even」、奇数なら「Odd」と返す関数を作ってください（3を渡す）。
 // 期待される出力：Odd
+function evenoddNumber($num)
+{
+    if ($num % 2 == 0) {
+        echo 'Even';
+    } else {
+        echo 'Odd';
+    }
+}
+evenoddNumber(3);
 
 // 問題10：名前と年齢を引数に取り、「〇〇さんは△△歳です」と表示する関数を作ってください（Yuki, 25）
 // 期待される出力：Yukiさんは25歳です
+function nameAge($str, $num)
+{
+    echo "{$str}さんは{$num}歳です";
+}
+nameAge('Yuki', 25);
