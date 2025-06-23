@@ -3,14 +3,14 @@
 require_once './functions.php';
 
 if (empty($_GET['id'])) {
-    // IDが指定されていない場合の処理
-    echo 'IDを指定してください';
-    exit;
+  // IDが指定されていない場合の処理
+  echo 'IDを指定してください';
+  exit;
 }
 if (!preg_match('/\A\d{1,11}+\z/u', $_GET['id'])) {
-    // IDが正しくない場合の処理
-    echo 'IDが正しくありません';
-    exit;
+  // IDが正しくない場合の処理
+  echo 'IDが正しくありません';
+  exit;
 }
 $id = (int) $_GET['id'];
 // echo $id;
@@ -24,9 +24,9 @@ $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$result) {
-    // IDに該当するデータがない場合の処理
-    echo '指定されたIDのデータは存在しません';
-    exit;
+  // IDに該当するデータがない場合の処理
+  echo '指定されたIDのデータは存在しません';
+  exit;
 }
 // var_dump($result);
 

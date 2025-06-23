@@ -1,0 +1,7 @@
+
+user名：mdnuser
+password：Takeyu0124
+ハッシュ化：$2y$10$agmpocirNvwJOI41QYClCO9kdcbV2vbu5K2hH0yGoT7mLj.8MJsgW
+
+$user = 'phpuser';
+$password = 'Takeyu0124';
