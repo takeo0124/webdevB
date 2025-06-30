@@ -1,8 +1,46 @@
 <?php
 session_start();
 require_once __DIR__ . '/inc/functions.php';
-include __DIR__ . '/inc/header.php';
+
+if (!empty($_SESSION['login'])) {
+    header('Location: index.php');
+    exit;
+}
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (empty($_POST['username']) || empty($_POST['password'])) {
+        $error = "ユーザ名、パスワードを入力してください。";
+    } else {
+        try {
+            $dbh = db_open();
+            $sql = "SELECT password FROM users WHERE username = :username";
+            $stmt = $dbh->prepare($sql);
+            $stmt->bindParam(':username', $_POST['username'], PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result && password_verify($_POST['password'], $result['password'])) {
+                session_regenerate_id(true);
+                $_SESSION['login'] = true;
+                header('Location: index.php');
+                exit;
+            } else {
+                $error = "ログインに失敗しました。";
+            }
+        } catch (PDOException $e) {
+            $error = "エラー！：" . str2html($e->getMessage());
+        }
+    }
+}
 ?>
+
+<?php include __DIR__ . '/inc/header.php'; ?>
+
+<?php if ($error): ?>
+    <p style="color:red;"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
+<?php endif; ?>
 
 <form method="post" action="login.php">
     <p>
@@ -16,40 +54,4 @@ include __DIR__ . '/inc/header.php';
     <button type="submit">ログイン</button>
 </form>
 
-<?php
-include __DIR__ . '/inc/footer.php';
-
-if (!empty($_SESSION['login'])) {
-    echo "ログイン済みです。<br>";
-    echo "<a href='index.php'>リストへ戻る</a>";
-    exit;
-}
-
-if ((empty($_POST['username'])) || (empty($_POST['password']))) {
-    echo "ユーザ名、パスワードを入力してください。";
-    exit;
-}
-
-try {
-    $dbh = db_open();
-    $sql = "SELECT password FROM users WHERE username = :username";
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':username', $_POST['username'], PDO::PARAM_STR);
-    $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$result) {
-        echo "ログインに失敗しました。";
-        exit;
-    }
-    // var_dump($_POST['password'], $result['password']);
-    if (password_verify($_POST['password'], $result['password'])) {
-        session_regenerate_id(true);
-        $_SESSION['login'] = true;
-        header('Location: index.php');
-    } else {
-        echo 'ログインに失敗しました。(2)';
-    }
-} catch (PDOException $e) {
-    echo "エラー！：" . str2html($e->getMessage());
-    exit;
-}
+<?php include __DIR__ . '/inc/footer.php'; ?>

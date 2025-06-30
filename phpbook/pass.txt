@@ -5,3 +5,9 @@ password：Takeyu0124
 
 $user = 'phpuser';
 $password = 'Takeyu0124';
+
+ロリポップDB
+データベース名：LAA1607741-sampledb
+データベースホスト：mysql325.phy.lolipop.lan
+ユーザー名：LAA1607741
+パスワード：Takeyu0124

@@ -11,10 +11,10 @@
 </header>
 
 <body>
-    <div>
+    <nav>
         <ul id='nav'>
             <li><a href="./">ホーム</a></li>
             <li><a href="./input.php">追加</a></li>
             <li><a href="./logout.php">ログアウト</a></li>
         </ul>
-    </div>
+    </nav>
