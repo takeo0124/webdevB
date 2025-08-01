@@ -1,0 +1,5 @@
+ロリポップDB
+データベース名：LAA1607741-bbsdb
+データベースホスト：mysql325.phy.lolipop.lan
+ユーザー名：LAA1607741
+パスワード：Takeyu0124
